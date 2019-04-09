@@ -8,6 +8,7 @@ prepareImagesForAnimation()
 wireImgScrollAnimation()
 wireNavItems()
 wireH2s()
+createForm()
 
 
 // ===============================================
@@ -58,42 +59,85 @@ function prepareImagesForAnimation() {
 }
 
 function wireImgScrollAnimation () {
-    window.addEventListener('scroll', debounce(checkSlide));
+    window.addEventListener('scroll', debounce(checkSlide))
 }
 
 function debounce(func, wait = 20, immediate = true) {
-    var timeout;
+    var timeout
     return function() {
-      var context = this, args = arguments;
-      var later = function() {
-        timeout = null;
-        if (!immediate) func.apply(context, args);
-      };
-      var callNow = immediate && !timeout;
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-      if (callNow) func.apply(context, args);
-    };
-  };
+        var context = this, args = arguments
+        var later = function() {
+            timeout = null
+            if (!immediate) func.apply(context, args)
+        }
 
-  
-  function checkSlide() {
-    const sliderImages = document.querySelectorAll('img');
+        var callNow = immediate && !timeout
+        clearTimeout(timeout)
+        timeout = setTimeout(later, wait)
+        if (callNow) func.apply(context, args)
+    }
+}
+
+
+function checkSlide() {
+    const sliderImages = document.querySelectorAll('img')
     sliderImages.forEach(sliderImage => {
-      // half way through the image
-      const slideInAt = (window.scrollY + window.innerHeight) - sliderImage.height / 2;
-      // bottom of the image
-      const imageBottom = sliderImage.offsetTop + sliderImage.height;
-      const isHalfShown = slideInAt > sliderImage.offsetTop;
-      const isNotScrolledPast = window.scrollY < imageBottom;
-      if (isHalfShown && isNotScrolledPast) {
-        sliderImage.classList.add('active');
-      } else {
-        sliderImage.classList.remove('active');
-      }
-    });
-  }
+        // half way through the image
+        const slideInAt = (window.scrollY + window.innerHeight) - sliderImage.height / 2
+        // bottom of the image
+        const imageBottom = sliderImage.offsetTop + sliderImage.height
+        const isHalfShown = slideInAt > sliderImage.offsetTop
+        const isNotScrolledPast = window.scrollY < imageBottom
+        if (isHalfShown && isNotScrolledPast) {
+            sliderImage.classList.add('active')
+        } else {
+            sliderImage.classList.remove('active')
+        }
+    })
+}
 
+function createForm() {
+    const homeContainer = document.querySelector('.home')
+    const container = document.createElement('section')
+    const heading = document.createElement('h2')
+    const form = document.createElement('form')
+    const fName = document.createElement('input')
+    const lName = document.createElement('input')
+    const email = document.createElement('input')
+    const emailLabel = document.createElement('label')
+    const fNameLabel = document.createElement('label')
+    const lNameLabel = document.createElement('label')
+
+    heading.textContent = 'Contact'
+
+    fName.placeHolder = 'Enter your first name'
+    lName.placeHolder = 'Enter your last name'
+    email.placeHolder = 'johndoe@example.com'
+    fName.id = 'firstName'
+    lName.id = 'lastName'
+    email.id = 'email'
+
+    emailLabel.textContent = 'Email'
+    fNameLabel.textContent = 'First Name'
+    lNameLabel.textContent = 'Last Name'
+    fNameLabel.htmlFor = 'firstName'
+    lNameLabel.htmlFor = 'lastName'
+    emailLabel.htmlFor = 'email'
+    
+
+    container.appendChild(heading)
+    container.appendChild(form)
+
+    form.appendChild(fNameLabel)
+    form.appendChild(fName)
+    form.appendChild(lNameLabel)
+    form.appendChild(lName)
+    form.appendChild(emailLabel)
+    form.appendChild(email)
+
+    console.log(homeContainer)
+    homeContainer.appendChild(container)
+}
 // function renderModal(event) {
 //     event.target.classList.remove('modal--on')
 //     if (!(Array.from(event.target.classList).includes('modal'))) {
