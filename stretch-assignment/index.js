@@ -1,3 +1,4 @@
+
 // ===============================================
 //                   Main
 // ===============================================
@@ -21,14 +22,9 @@ function greetUser() {
 }
 
 function wireNavItems() {
-    const mainHeader = document.querySelector('.main-header')
     const navItems = [...document.querySelectorAll('nav .nav-link')]
+    const nav = document.querySelector('nav')
 
-    mainHeader.addEventListener('click', event => {
-        event.target.querySelector('a').style.display = 'hidden'
-        console.log("fired")
-    })
-    
     navItems.forEach(item => {
         item.addEventListener('mouseover', event => {
             event.target.style.color = "#FFEBCD"
@@ -38,8 +34,14 @@ function wireNavItems() {
         })
         item.addEventListener('click',  event => {
             event.preventDefault()
-            event.stopPropogation()
+            event.stopPropagation()
         })
+    })
+
+    nav.addEventListener('click', event => {
+        // stop propagation on line 37 prevents this from happening
+        document.body.style.display = 'none'
+        console.log("oh no!")
     })
 } 
 
