@@ -3,6 +3,9 @@
 //                   Main
 // ===============================================
 
+window.onload = function() {
+    alert('Welcome to the fun bus!')
+}
 wireNavItems();
 wireH2s();
 
@@ -33,6 +36,11 @@ function wireH2s() {
             event.target.style.backgroundColor = '#17a2b8'
         })
     })
+}
+
+function greetUser() {
+    alert('Welcome to the Fun Bus!')
+    console.log('welcome')
 }
 
 // function renderModal(event) {
