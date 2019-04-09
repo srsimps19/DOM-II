@@ -3,13 +3,13 @@
 //                   Main
 // ===============================================
 
-window.onload = greetUser
+// window.onload = greetUser
 prepareImagesForAnimation()
 wireImgScrollAnimation()
 wireNavItems()
 wireH2s()
 createForm()
-
+wireForm()
 
 // ===============================================
 //                  Helpers
@@ -107,6 +107,7 @@ function createForm() {
     const emailLabel = document.createElement('label')
     const fNameLabel = document.createElement('label')
     const lNameLabel = document.createElement('label')
+    const submitBtn = document.createElement('button')
 
     heading.textContent = 'Contact'
 
@@ -123,6 +124,9 @@ function createForm() {
     fNameLabel.htmlFor = 'firstName'
     lNameLabel.htmlFor = 'lastName'
     emailLabel.htmlFor = 'email'
+
+    submitBtn.role = 'submit'
+    submitBtn.classList.add('btn')
     
 
     container.appendChild(heading)
@@ -134,9 +138,33 @@ function createForm() {
     form.appendChild(lName)
     form.appendChild(emailLabel)
     form.appendChild(email)
+    form.appendChild(submitBtn)
 
-    console.log(homeContainer)
     homeContainer.appendChild(container)
+}
+
+function wireForm() {
+    const form = document.querySelector('form')
+
+    // form.addEventListener('mouseover', event => {
+    //     event.target.style.border = '1px solid #ffff33'
+    //     console.log(event.target)
+    // })
+    Array.from(form.querySelectorAll('input')).forEach(input => {
+        input.addEventListener('focusin', event => {
+            event.target.style.backgroundColor = '#ffff33'
+            console.log(event.target)
+        })
+
+        input.addEventListener('focusout', event => {
+            event.target.style.backgroundColor = 'white'
+        })
+    })
+
+    form.addEventListener('submit', event => {
+        console.log(event)
+        event.preventDefault()
+    })
 }
 // function renderModal(event) {
 //     event.target.classList.remove('modal--on')
