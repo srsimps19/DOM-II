@@ -10,6 +10,7 @@ wireNavItems()
 wireH2s()
 createForm()
 wireForm()
+listenForWindowResize()
 
 // ===============================================
 //                  Helpers
@@ -164,6 +165,12 @@ function wireForm() {
     form.addEventListener('submit', event => {
         console.log(event)
         event.preventDefault()
+    })
+}
+
+function listenForWindowResize() {
+    window.addEventListener('resize', event => {
+        document.body.style.backgroundColor = 'rgba(200,200,200, 0.3)'
     })
 }
 // function renderModal(event) {
