@@ -3,7 +3,7 @@
 //                   Main
 // ===============================================
 
-// window.onload = greetUser
+window.onload = greetUser
 prepareImagesForAnimation()
 wireImgScrollAnimation()
 wireNavItems()
@@ -22,7 +22,14 @@ function greetUser() {
 }
 
 function wireNavItems() {
+    const mainHeader = document.querySelector('.main-header')
     const navItems = [...document.querySelectorAll('nav .nav-link')]
+
+    mainHeader.addEventListener('click', event => {
+        event.target.querySelector('a').style.display = 'hidden'
+        console.log("fired")
+    })
+    
     navItems.forEach(item => {
         item.addEventListener('mouseover', event => {
             event.target.style.color = "#FFEBCD"
@@ -32,6 +39,7 @@ function wireNavItems() {
         })
         item.addEventListener('click',  event => {
             event.preventDefault()
+            event.stopPropogation()
         })
     })
 } 
@@ -173,17 +181,3 @@ function listenForWindowResize() {
         document.body.style.backgroundColor = 'rgba(200,200,200, 0.3)'
     })
 }
-// function renderModal(event) {
-//     event.target.classList.remove('modal--on')
-//     if (!(Array.from(event.target.classList).includes('modal'))) {
-//         event.target.classList.add('modal')
-//     }
-//     event.target.classList.add('modal--off')
-//     console.log(event.target.classList)
-// }
-
-// function hideModal(evtTarget) {
-//     evtTarget.classList.remove('modal--off')
-//     evtTarget.classList.add('modal--on')
-//     console.log(evtTarget.classList)
-// }
